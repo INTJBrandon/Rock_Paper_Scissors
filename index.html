@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Rock, Paper, Scissors</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        
+        
+        <script>
+            function upperFirst(string) 
+            {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+            function computerPlay() 
+            {
+                let choices = ['rock', 'paper', 'scissor']
+                let computerSelection = choices[Math.floor(Math.random() * choices.length)];
+                console.log(`The computer played ${upperFirst(computerSelection)}`)
+                return computerSelection;
+            }
+            function playerPlay() 
+            {
+                let choices = ['rock', 'paper', 'scissor']
+                let playerSelection = prompt('Rock, Paper, or Scissor?')
+                if (choices.includes(playerSelection.toLowerCase()))
+                {
+                    console.log(`You chose ${upperFirst(playerSelection)}`);
+                    return playerSelection;
+                }
+                else 
+                {
+                    console.log("This choice doesn't exist! Choose Rock, Paper or Scissor.")
+                    return false;
+                }
+            }
+            function playRound()
+            {
+                let playerSelection = playerPlay();
+                if (playerSelection) 
+                {
+                    let computerSelection = computerPlay();
+                    switch(true) 
+                    {
+                        case computerSelection === 'paper' && playerSelection === 'scissor':
+                            console.log('You win! Scissor beats paper');
+                            return true;
+                            break;
+                        case computerSelection === 'rock' && playerSelection === 'paper':
+                            console.log('You win! Paper beats rock');
+                            return true;
+                            break;
+                        case computerSelection === 'scissor' && playerSelection === 'rock':
+                            console.log('You win! Rock beats scissor');
+                            return true;
+                            break;
+                        case computerSelection === 'scissor' && playerSelection === 'paper':
+                            console.log('You lose! Scissor beats paper');
+                            return false;
+                            break;
+                        case computerSelection === 'paper' && playerSelection === 'rock':
+                            console.log('You lose! Paper beats rock');
+                            return false;
+                            break;
+                        case computerSelection === 'rock' && playerSelection === 'scissor':
+                            console.log('You lose! Rock beats scissor');
+                            return false;
+                            break;
+                        case computerSelection === playerSelection:
+                            console.log("It's a tie");
+                            break;
+                    }
+                }
+                
+            }
+            function game() 
+            {
+                let computer = 0;
+                let player = 0;
+                while(true) 
+                {
+                    console.log("___________________________")
+                    let whoWon = playRound();
+                    if(whoWon === true) 
+                    {
+                        ++player;
+                        console.log(`You have won: ${player} rounds`)
+                    }
+                    else if(whoWon === false) 
+                    {
+                        ++computer;
+                        console.log(`computer has won: ${computer} rounds`)
+                    }
+                    if(computer === 3) 
+                {
+                    console.log("Computer Wins The Game!")
+                    break;
+                }
+                    else if(player === 3) 
+                    {
+                        console.log("You Win The Game!")
+                        break;
+                    }
+                }
+                
+            }
+        </script>
+    </body>
+</html>
